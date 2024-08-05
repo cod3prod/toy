@@ -1,13 +1,43 @@
 import { useState, useEffect } from 'react'; 
 
-function Square({value, onSquareClick}){
+function Square({value, onSquareClick, onVictory}){
   return(
-    <div className='square' onClick={onSquareClick}>{value}</div>
+    <div className={onVictory ? 'square active':'square'} onClick={onSquareClick}>{value}</div>
   )
 }
 
 function Board({xIsNext, squares, onPlay, currentMove}){
-  const winner = calculateWinner(squares);
+  const [winner, setWinner] = useState(null);
+  const [victorySelections, setVictorySelections] = useState([]);
+
+  function calculateWinner(squares){
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+  
+    for(let i = 0 ; i < lines.length; i++){
+      const [a, b, c] = lines[i];
+      if(squares[a]&&squares[a]===squares[b]&&squares[a]===squares[c]){
+        return {winner : squares[a], line : lines[i]};
+      }
+    }
+    
+    return {winner : null, line : []};
+  }
+
+  useEffect( () => {
+    const result = calculateWinner(squares);
+    setWinner(result.winner);
+    setVictorySelections(result.line);
+  }, [squares]);
+  
   let status;
   if(winner){
     status = `Winner : Player ${winner}`;
@@ -29,8 +59,9 @@ function Board({xIsNext, squares, onPlay, currentMove}){
     onPlay(nextSquares);
   }
   const allSquares = squares.map((square, idx) => {
+    const onVictory = victorySelections.includes(idx);
     return (
-      <Square key={idx} value={square} onSquareClick={()=>{handleClick(idx)}} />
+      <Square key={idx} value={square} onVictory={onVictory} onSquareClick={()=>{handleClick(idx)}} />
     )
   })
   
@@ -43,28 +74,6 @@ function Board({xIsNext, squares, onPlay, currentMove}){
       </div>
     </>
   )
-}
-
-function calculateWinner(squares){
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  for(let i = 0 ; i < lines.length; i++){
-    const [a, b, c] = lines[i];
-    if(squares[a]&&squares[a]===squares[b]&&squares[a]===squares[c]){
-      return squares[a]
-    }
-  }
-  
-  return null;
 }
 
 export default function Game(){
@@ -83,7 +92,7 @@ export default function Game(){
       description = 'GAME START!';  
     }
     else{
-      description = `Go to move #${move}  (${parseInt(currentMove/3)}, ${currentMove%3})`
+      description = `Go to move #${move}  (${parseInt(move/3)}, ${move%3})`
     }
 
     return (
