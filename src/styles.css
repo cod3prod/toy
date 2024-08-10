@@ -1,0 +1,128 @@
+* {
+  margin: 0 auto; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width : 100%;
+  height : 100vh;
+}
+.status{
+  display: flex;
+  margin: 2rem 1rem;
+  background-color: black;
+  color:white;
+  width: 90%;
+  height:3rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width:70%;
+  padding : 1rem;
+  gap: 3%;
+}
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 2px 2px rgb(109, 99, 99);
+  width: 20%;
+  aspect-ratio: 1;
+  margin-bottom: 3%;
+  border-radius: 8px;
+  background-color: #d1cfcf00;
+  cursor: pointer;
+}
+.game-history {
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 40%;
+  background-color: #EEF5FF;
+  padding:1rem;
+  border-radius: 8px;
+  text-align: center;
+  overflow: auto;
+}
+#reset {
+  position:absolute;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  right:0;
+  width:50px;
+  height:50px;
+  border-radius: 100%;
+  background-color: rgba(199, 184, 184, 0.541);
+  cursor: pointer;
+}
+#reset:hover {
+  background-color: black;
+  color:white;
+}
+.log-title {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 2rem;
+  margin-bottom:1rem;
+  background-color: rgba(114, 134, 223, 0.274);
+  border-radius: 8px;;
+}
+.log-description {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 2rem;
+  width:100%;
+  margin-bottom:0.5rem;
+  border-radius: 8px;
+  text-align: center;;
+}
+.log-description:hover{
+  background-color: rgba(61, 211, 231, 0.404);
+  color:rgb(255, 0, 0);
+}
+
+
+@media screen and (min-width:767px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width : 95%;
+    height : 100vh;
+  }
+  .status{
+    display: flex;
+    margin: 3rem 1rem;
+    background-color: black;
+    color:white;
+    width: 100%;
+    height:3rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+  }
+  .board {
+    width:50%
+  }
+  .game-history {
+    width:50%;
+  }
+}
