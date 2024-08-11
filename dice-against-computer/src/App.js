@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix } from "@fortawesome/free-solid-svg-icons";
+import { faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix, faArrowsSpin } from "@fortawesome/free-solid-svg-icons";
 
 function Dice({ diceFace, player, score }) {
   return (
@@ -44,6 +44,14 @@ function End({ status }) {
         <span onClick={closeModal} class="close">&times;</span>
         <p>{status}</p>
       </div>
+    </div>
+  );
+}
+
+function ResetButton({onReset}) {
+  return (
+    <div onClick={onReset} className='reset-button'>
+      <FontAwesomeIcon icon={faArrowsSpin} />
     </div>
   );
 }
@@ -105,6 +113,15 @@ export default function App() {
     logRef.current.scrollTop = logRef.current.scrollHeight;
   }
 
+  function reset() {
+    setUserScore(0);
+    setComScore(0);
+    setUserDice(0);
+    setComDice(0);
+    setWinner(null);
+    setHistory([]);
+  }
+
   return (
     <div className='game'>
       <div className='game-title'>Dice against Computer</div>
@@ -115,10 +132,11 @@ export default function App() {
       <div className='dice-button' onClick={rollDice}>Roll the dice</div>
       <div ref={logRef} className='game-log'>
         <GameLog history={history} />
+        
       </div>
 
       <End status={winner} />
-
+      <ResetButton onReset={reset}/>
     </div>
   );
 }
