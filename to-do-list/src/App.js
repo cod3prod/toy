@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faPen, faCheck, } from "@fortawesome/free-solid-svg-icons";
 
 function TodoHeader() {
   const today = new Date();
@@ -34,11 +34,13 @@ function TodoInput({ onInput, tasks }) {
   );
 }
 
-function TodoItems({ tasks, onDelete }) {
+function TodoItems({ tasks, onUpdate }) {
   const checkRefs = useRef([]);
+  const inputRefs = useRef([]);
+  const itemRefs = useRef([]);
 
   function deleteList(currentIndex) {
-    onDelete(tasks.filter((el, index) => {
+    onUpdate(tasks.filter((el, index) => {
       return index !== currentIndex;
     }));
   }
@@ -55,17 +57,47 @@ function TodoItems({ tasks, onDelete }) {
     }
   }
 
+  function modifyListReady(i) {
+    const inputRef = inputRefs.current[i];
+    const itemRef = itemRefs.current[i];
+    inputRef.style.display = 'block';
+    inputRef.value = itemRef.innerText;
+    itemRef.style.display = 'none';
+  }
+
+  function modifyList(i) {
+    const nextTasks = tasks.slice();
+    const inputRef = inputRefs.current[i];
+    const itemRef = itemRefs.current[i];
+    
+    nextTasks[i] = inputRef.value;
+    onUpdate(nextTasks);
+    inputRef.style.display = 'none';
+    itemRef.style.display = 'block';
+  }
+
   const todoList = tasks.map((el, idx) => {
     return (
       <div key={idx} className='todo-item-container'>
-        <div ref={el => checkRefs.current[idx] = el} onClick={() => { handleCheck(idx) }} className='todo-check'>
+        <div ref={div => checkRefs.current[idx] = div} onClick={() => { handleCheck(idx) }} className='todo-check'>
           <FontAwesomeIcon icon={faCheck} />
         </div>
-        <div className='todo-item'>
+        <div ref={div => itemRefs.current[idx] = div} className='todo-item'>
           {el}
         </div>
-        <div onClick={() => { deleteList(idx) }} className='todo-delete'>
-          <FontAwesomeIcon icon={faTrashCan} />
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          modifyList(idx)
+        }}>
+          <input ref={input => inputRefs.current[idx] = input} type='text' className='todo-modify-input'></input>
+        </form>
+        <div className='todo-buttons'>
+          <div onClick={() => { modifyListReady(idx) }} className='todo-modify'>
+            <FontAwesomeIcon icon={faPen} />
+          </div>
+          <div onClick={() => { deleteList(idx) }} className='todo-delete'>
+            <FontAwesomeIcon icon={faTrashCan} />
+          </div>
         </div>
       </div>
 
@@ -88,7 +120,7 @@ export default function Todolist() {
     setTasks(nextTasks);
   }
 
-  function handleDelete(tasks) {
+  function handleUpdate(tasks) {
     const newTasks = tasks.slice();
     setTasks(newTasks)
   }
@@ -97,7 +129,7 @@ export default function Todolist() {
     <div className='todo-list-container'>
       <TodoHeader />
       <TodoInput onInput={handleAdd} tasks={tasks} />
-      <TodoItems onDelete={handleDelete} tasks={tasks} />
+      <TodoItems onUpdate={handleUpdate} tasks={tasks} />
     </div>
   );
 }
