@@ -1,11 +1,14 @@
 import React from 'react';
 import './Header.css'
 
-const Hedaer = () => {
+const Header = () => {
     return (
-        <div>
-            {/* 내용 */}
-        </div>
+        <header>
+            <div className="inner">
+                <div className='sub-menu'></div>
+                <div className='main-menu'></div>
+            </div>
+        </header>
     );
 };
 
