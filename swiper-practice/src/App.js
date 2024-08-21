@@ -1,6 +1,12 @@
 import React, { useRef, useState } from "react";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,7 +17,9 @@ export default function App() {
   return (
     <>
       <Swiper className="mySwiper">
-        <div className="swiper-controller"></div>
+        <div className="swiper-controller">
+          <FontAwesomeIcon icon={faGear} />
+        </div>
         <SwiperSlide>Slide 1</SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
