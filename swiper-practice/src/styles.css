@@ -23,4 +23,93 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+}
+
+.mySwiper .swiper-controller:hover {
+  color:white;
+}
+
+.modal {
+  position: absolute;
+  top:0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.modal .close {
+  position : absolute;
+  box-sizing: border-box;
+  padding-top: 1px;
+  top: 30px;
+  right: 30px;
+  font-size: 30px;
+  width:35px;
+  height:35px;
+  text-align: center;
+  border-radius: 8px;
+  color:white;
+  background-color: rgb(214, 129, 129);
+}
+
+.modal .close:hover {
+  background-color: red;
+}
+
+.modal .setting {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin:80px auto;
+  width:80%;
+  height: 80%;
+  padding:20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.modal .setting .setting-wrapper {
+  margin-bottom: 10px;
+  height: 10%;
+  display: flex;
+  border:1px black solid
+}
+
+
+.modal .setting .setting-wrapper .setting-content{
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  width:70%;
+}
+
+.modal .setting .setting-wrapper .setting-controller{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:30%;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.modal .setting .setting-wrapper .setting-controller input{
+  width:50%;
+}
+
+.modal .setting .setting-wrapper .setting-controller .dropdown {
+  font-size: 16px;
+}
+
+.modal .dropdown .dropdown-contents {
+  display: none;
+  
+}
+
+.modal .dropdown:hover .dropdown-contents {
+  display: flex;
+  
+  flex-direction: column;
 }
