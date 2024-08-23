@@ -23,6 +23,7 @@ function Modal({
   isScrollOn,
   isVertical,
   isLoopOn,
+  isAutoOn,
   slideNumber,
   slidesPerView,
   handleSlideNumber,
@@ -32,7 +33,8 @@ function Modal({
   handleVertical,
   handleLoop,
   handleModal,
-  handlePagination
+  handlePagination,
+  handleAuto
 }) {
   const inputNumRef = useRef();
   const inputPerViewRef = useRef();
@@ -100,29 +102,36 @@ function Modal({
 
         <div className="setting-wrapper">
           <div className="setting-content">Navigation</div>
-          <div className="setting-controller">
-            <FontAwesomeIcon onClick={handleNav} icon={isNavOn ? faToggleOn : faToggleOff} />
+          <div onClick={handleNav} className="setting-controller">
+            <FontAwesomeIcon icon={isNavOn ? faToggleOn : faToggleOff} />
           </div>
         </div>
 
         <div className="setting-wrapper">
           <div className="setting-content">Scrollbar</div>
-          <div className="setting-controller">
-            <FontAwesomeIcon onClick={handleScroll} icon={isScrollOn ? faToggleOn : faToggleOff} />
+          <div onClick={handleScroll} className="setting-controller">
+            <FontAwesomeIcon icon={isScrollOn ? faToggleOn : faToggleOff} />
           </div>
         </div>
 
         <div className="setting-wrapper">
           <div className="setting-content">Vertical</div>
-          <div className="setting-controller">
-            <FontAwesomeIcon onClick={handleVertical} icon={isVertical ? faToggleOn : faToggleOff} />
+          <div onClick={handleVertical} className="setting-controller">
+            <FontAwesomeIcon icon={isVertical ? faToggleOn : faToggleOff} />
           </div>
         </div>
 
         <div className="setting-wrapper">
           <div className="setting-content">Loop</div>
-          <div className="setting-controller">
-            <FontAwesomeIcon onClick={handleLoop} icon={isLoopOn ? faToggleOn : faToggleOff} />
+          <div onClick={handleLoop} className="setting-controller">
+            <FontAwesomeIcon icon={isLoopOn ? faToggleOn : faToggleOff} />
+          </div>
+        </div>
+
+        <div className="setting-wrapper">
+          <div className="setting-content">Autoplay</div>
+          <div onClick={handleAuto} className="setting-controller">
+            <FontAwesomeIcon icon={isAutoOn ? faToggleOn : faToggleOff} />
           </div>
         </div>
       </div>
@@ -138,6 +147,7 @@ export default function App() {
   const [isScrollOn, setIsScrollOn] = useState(true);
   const [isVertical, setIsVertical] = useState(false);
   const [isLoopOn, setIsLoopOn] = useState(false);
+  const [isAutoOn, setIsAutoOn] = useState(true);
   const [pgMode, setPgMode] = useState(1);
 
   const pgModeList = [
@@ -180,6 +190,15 @@ export default function App() {
     setSlidesPerView(num);
   }
 
+  function handleAuto(){
+    if(!isAutoOn){
+      setIsAutoOn(true);
+    }
+    else{
+      setIsAutoOn(false);
+    }
+  }
+
   const slides = Array(slideNumber).fill(null).map((_, idx) => (
     <SwiperSlide key={idx}>Slide {idx + 1}</SwiperSlide>
   ));
@@ -187,6 +206,7 @@ export default function App() {
   return (
     <>
       <Swiper
+        key={`${pgMode}+10*${isLoopOn}+100*${isAutoOn}`}
         className="mySwiper"
         navigation={isNavOn}
         pagination={pgModeList[pgMode]}
@@ -194,10 +214,10 @@ export default function App() {
         direction={isVertical ? 'vertical' : 'horizontal'}
         loop={isLoopOn}
         slidesPerView={slidesPerView}
-        autoplay={{
-          delay: 2500,
+        autoplay={isAutoOn?{
+          delay: 1000,
           disableOnInteraction: false,
-        }}
+        }:false}
         modules={[Navigation, Pagination, Scrollbar, Autoplay]}
       >
         <div onClick={handleModal} className="swiper-controller">
@@ -211,6 +231,7 @@ export default function App() {
         isScrollOn={isScrollOn}
         isVertical={isVertical}
         isLoopOn={isLoopOn}
+        isAutoOn={isAutoOn}
         slideNumber={slideNumber}
         slidesPerView={slidesPerView}
         handleSlideNumber={handleSlideNumber}
@@ -221,6 +242,7 @@ export default function App() {
         handleLoop={handleLoop}
         handleModal={handleModal}
         handleScroll={handleScroll}
+        handleAuto={handleAuto}
       />
     </>
   );
