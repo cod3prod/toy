@@ -1,0 +1,11 @@
+header .main-menu {
+    border-bottom: 1px solid #ffe655;
+}
+
+header .menu-title ul li {
+    position: relative;
+    display: inline-block;
+    height: 100px;
+    line-height: 100px;
+    padding : 0 10px;
+}
