@@ -2,10 +2,48 @@ header .main-menu {
     border-bottom: 1px solid #ffe655;
 }
 
-header .menu-title ul li {
-    position: relative;
+header .inner {
+    text-align: center;
+}
+
+header .main-menu ul {
     display: inline-block;
+
+}
+
+header .main-menu .main-menu-title {
+    display:inline-block;
+    height: 100px;
+}
+
+header .main-menu .main-menu-title>a {
+    display:inline-block;
+    padding: 0 10px;
     height: 100px;
     line-height: 100px;
-    padding : 0 10px;
+    color:#888888;
+    font-size:22px;
+}
+
+
+header .main-menu .main-menu-title:hover a  {
+    color:#333333;
+    border-bottom: 3px solid #7e69fe;
+}
+
+
+.main-menu-description {
+    position:fixed;
+    top:150px;
+    left:0px;
+    padding-top:20px;
+    height: 50px;
+    width:100%;
+    display: none;
+    box-shadow:#888888;
+}
+
+header .main-menu .main-menu-title:hover .main-menu-description {
+    display :block;
+    box-shadow:  0 2px 2px rgba(0, 0, 0, 0.2);
 }
