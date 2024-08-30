@@ -1,6 +1,15 @@
-section .season-image {
-    width:100%;
-    min-height:500px;
+.season {
+    display: flex;
+    flex-direction: column;
+}
+
+.season-container {
+    margin-bottom: 20px; 
+}
+
+.season-image {
+    width: 100%;
+    min-height: 500px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
