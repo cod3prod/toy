@@ -1,7 +1,9 @@
 header .main-menu {
+    width:100%;
     border-bottom: 1px solid #ffe655;
     position: fixed;
     background-color: white;
+    z-index: 100;
 }
 
 header .inner {
@@ -31,6 +33,7 @@ header .main-menu .main-menu-title>a {
 header .main-menu .main-menu-title:hover a  {
     color:#333333;
     border-bottom: 3px solid #7e69fe;
+
 }
 
 
@@ -44,6 +47,7 @@ header .main-menu .main-menu-title:hover a  {
     display: none;
     box-shadow:#888888;
     background-color: white;
+    
 }
 
 header .main-menu .main-menu-title:hover .main-menu-description {

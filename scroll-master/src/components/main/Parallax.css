@@ -4,7 +4,29 @@
 }
 
 .season-container {
+    position: relative;
     margin-bottom: 20px; 
+}
+
+.season-container:first-child {
+    margin-top:100px;
+}
+
+.season-title {
+    background-color: rgba(0, 0 ,0 ,0.5);
+    position: absolute;
+    top:0;
+    bottom:0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin:auto ;
+    width:20%;
+    height: 20%;
+    color:white;
+    font-size: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .season-image {
@@ -14,4 +36,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.season-text {
+    text-align: center;
 }
