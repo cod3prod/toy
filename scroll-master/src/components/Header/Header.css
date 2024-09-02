@@ -1,7 +1,11 @@
+header {
+    background-color: white;
+}
 header .main-menu {
     width:100%;
     border-bottom: 1px solid #ffe655;
     position: fixed;
+    top:0;
     background-color: white;
     z-index: 100;
 }

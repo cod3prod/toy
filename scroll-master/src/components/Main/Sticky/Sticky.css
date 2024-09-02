@@ -1,0 +1,25 @@
+.sticky {
+    /* padding : 30px; */
+    height: 800vh;
+}
+
+.sticky .cards-container{
+    margin: 30px auto;
+}
+
+.sticky .card {
+    position: sticky;
+    padding : 1rem;
+    background-color: white;
+    height:300px;
+    width:700px;
+    margin-top:20px;
+    border: 1px solid #E2E8F0;
+    border-radius:1.5rem;
+    line-height: 1.5rem;
+    box-shadow: 0px 3px 4px -3px rgba(17, 17, 17, 0.05), 0px 4px 8px -3px rgba(17, 17, 17, 0.05);
+}
+
+.sticky .card:first-child {
+    margin-top:120px;
+}

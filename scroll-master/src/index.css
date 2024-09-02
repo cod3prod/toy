@@ -1,9 +1,15 @@
 body {
   font-family: 'Noto Sans';
+  background: #f3f3f3;
 }
 
 a {
   text-decoration: none;
+}
+
+section {
+  position: relative;
+  margin-top: 100px;
 }
 
 .inner {

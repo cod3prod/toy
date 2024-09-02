@@ -25,8 +25,11 @@ export default function SeasonImages() {
 
         return (
             <div key={idx} className='season-container'>
-                <div className='season-title'>{seasons[idx]}</div>
-                <div className='season-image' style={divStyle}></div>
+                <div className='season-image' style={divStyle}>
+                    <span className='season-title'>
+                        {seasons[idx]}
+                    </span>
+                </div>
                 <SeasonText i={idx}/>
             </div>
         );
